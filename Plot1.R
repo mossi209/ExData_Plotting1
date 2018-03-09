@@ -1,0 +1,8 @@
+file <- read.table("household_power_consumption.txt", header = T, sep = ";", stringsAsFactors = F)
+library(dplyr)
+file <- tbl_df(file)
+file$Date <- as.Date(file$Date, "%d/%m/%Y")
+date <- filter(file, Date <= "2007-02-02" & Date >= "2007-02-01")
+with(date, hist(Global_Active_Power, col = "red", main = "Global Active Power", xlab = "Global Active Power(kilowatts)")
+     dev.copy(png, file = "Plot 1")
+     dev.off()
